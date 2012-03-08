@@ -1,5 +1,5 @@
 package edu.umn.ncs
-//import org.codehaus.groovy.grails.plugins.orm.auditable.AuditLogEvent
+import org.codehaus.groovy.grails.plugins.orm.auditable.AuditLogEvent
 
 class ReportingStaff {
 
