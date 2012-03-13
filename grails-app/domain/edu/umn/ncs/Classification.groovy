@@ -1,38 +1,18 @@
 package edu.umn.ncs
 import org.codehaus.groovy.grails.plugins.orm.auditable.AuditLogEvent
 
-/**
-This class represents the contract type that study staff are assigned to and also report on the DLR via the Activity category.
-*/
 class Activity {
 
-	/** Flags this domain for auditing, on all updates and changes, using the auditable plugin */
 	static auditable = true
 
-	/** Description of Activity (i.e., conract type) */
 	String name
-	/** Indicates whether this specific activity is still made available, in the DLR application, for staff to report. */
     	Boolean active = false
-	/** Date activity was added to database */
     	Date dateCreated = new Date()
-	/** User account of person that added activity to database */
     	String userCreated
-	/** Application, used by person, to add activity to database */
     	String appCreated= 'ncs-dlr'
 
-	/** Sets default string for this domain to activity "name" (description) */	
 	String toString() { name }
 
-	/** Non-default constraints for this class 
-	<dl>
-		<dt>name</dt>
-			<dd>cannot be blank, maximum length of 1024 characters</dd>
-		<dt>userCreated</dt>
-			<dd>cannot be blank</dd>
-		<dt>appCreated</dt>
-			<dd>cannot be blank</dd>
-	</dl>	
-	*/
     	static constraints = {
         	name(blank:false, maxSize:1024)
         	active()
@@ -41,10 +21,8 @@ class Activity {
         	appCreated(blank:false)
     	}		
 
-	/** Sets the default sorting, for this domain, by "name," in ascending order. */
     	static mapping = { sort "name" }
 
-	/** Trigger that saves old activity information to an auditLog instance, for tracking all changes to this class */
     	def onDelete = { oldMap ->
         
         	def now = new Date()
