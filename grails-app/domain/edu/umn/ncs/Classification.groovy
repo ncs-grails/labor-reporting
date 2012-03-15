@@ -15,11 +15,9 @@ class Classification {
 
     static constraints = {
 		name(blank:false, maxSize:96)
-		active
-		dateCreated
+		active()
+		dateCreated()
 		userCreated(blank:false)
 		appCreated(blank:false)
     }
-
-
 }
