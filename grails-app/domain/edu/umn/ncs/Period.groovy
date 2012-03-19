@@ -9,6 +9,8 @@ class Period {
 	Date startDate
 	Date endDate
 
+	String toString () { "${startDate} - ${endDate}" }
+
     static constraints = {
 		startDate()
 		endDate()
