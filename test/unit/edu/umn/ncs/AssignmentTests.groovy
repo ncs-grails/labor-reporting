@@ -1,7 +1,5 @@
 package edu.umn.ncs
 
-
-
 import grails.test.mixin.*
 import org.junit.*
 
@@ -10,6 +8,13 @@ import org.junit.*
  */
 @TestFor(Assignment)
 class AssignmentTests {
+
+	void testConstraints() {
+
+		
+
+	} // testConstraints
+
 
     void testSomething() {
        fail "Implement me"

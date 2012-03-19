@@ -12,7 +12,7 @@ class TaskSponsoredFinancialReporting {
 	String appCreated = 'labor-reporting'
 
     static constraints = {
-		name(blank:false, maxSize:1024)
+		name(blank:false, unique:true, maxSize:512)
 		active()
 		dateCreated()
 		userCreated(blank:false, maxSize:60)

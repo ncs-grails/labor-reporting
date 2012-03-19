@@ -14,7 +14,7 @@ class Classification {
 	String toString() { name }	
 
     static constraints = {
-		name(blank:false, maxSize:96)
+		name(blank:false, unique:true, maxSize:96)
 		active()
 		dateCreated()
 		userCreated(blank:false, maxSize:60)

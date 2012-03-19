@@ -13,7 +13,7 @@ class TaskOperationsDataElements {
 	String appCreated = 'labor-reporting'
 
     static constraints = {
-		name(blank:false)
+		name(blank:false, unique:true, maxSize:100)
 		active()
 		dateCreated(blank:false)
 		userCreated(blank:false)

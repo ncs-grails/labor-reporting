@@ -16,7 +16,7 @@ class SponsoredFinancialReportingReferenceInvoiceNumber {
     
 	static constraints = {
 		period()
-		referenceInvoiceNumber()
+		referenceInvoiceNumber(unique:true)
 		reportCompletionDate()
 		dateCreated()
 		userCreated(blank:false, maxSize:60) 

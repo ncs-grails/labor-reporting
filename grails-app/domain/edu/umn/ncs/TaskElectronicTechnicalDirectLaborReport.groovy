@@ -13,7 +13,7 @@ class TaskElectronicTechnicalDirectLaborReport {
 	String appCreated = 'labor-reporting'
 
     static constraints = {
-		name(blank:false)
+		name(blank:false, unique:true, maxSize:60)
 		active()
 		dateCreated(blank:false)
 		userCreated(blank:false)
