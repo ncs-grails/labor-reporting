@@ -18,8 +18,41 @@ class Title {
 		name(blank:false, maxSize:128)
 		active()
 		dateCreated()
-		userCreated(blank:false)
-		appCreated(blank:false)
+		userCreated(blank:false, maxSize:60)
+		appCreated(blank:false, maxSize:60)
+    }
+
+    def onDelete = { oldMap ->
+
+        def now = new Date()
+
+        String oldValue = "Title"
+            oldValue += ", name: ${oldMap.name}"
+            oldValue += ", active: ${oldMap.active}"
+            oldValue += ", dateCreated: ${oldMap.dateCreated}"
+            oldValue += ", userCreated: ${oldMap.userCreated}"
+            oldValue += ", appCreated: ${oldMap.appCreated} "
+        //println "PRINTLN LaborCategoryDomain.onDelete.oldValue: ${oldValue}"
+
+        String className = this.class.toString().replace('class ', '')
+        //println "${now}\tAudit:DELETE::\t${oldValue}"
+
+        def auditLogEventInstance = new AuditLogEvent(
+            className: className,
+            dateCreated: now,
+            eventName: 'DELETE',
+            lastUpdated: now,
+            oldValue: oldValue,
+            persistedObjectId: this.id,
+            persistedObjectVersion: this.version
+        )
+
+        if ( ! auditLogEventInstance.save() ) {
+            auditLogEventInstance.errors.each{
+                //println "${now}\tError Transacting DELETE:: \t ${it}"
+            }
+        }
+
     }
 
 }
