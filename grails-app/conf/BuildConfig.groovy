@@ -38,5 +38,30 @@ grails.project.dependency.resolution = {
         runtime ":resources:1.1.5"
 
         build ":tomcat:$grailsVersion"
+
+		compile ":audit-logging:0.5.4"
+		compile ":spring-security-core:1.2.7.3"
+		compile ":spring-security-ldap:1.0.6"   
+		compile ":spring-security-shibboleth-native-sp:1.0.3"
+
+		// Do not compile in WAR
+		provided ":spring-security-mock:1.0.1" 
+
+		// Test
+		test ":code-coverage:1.2.5"
+		test ":codenarc:0.16.1"
     }
 }
+
+codenarc.reports = {
+	JenkinsXmlReport('xml') {
+		outputFile = 'target/test-reports/CodeNarcReport.xml'
+		title = 'CodeNarc Report for Direct Labor Reporting System'
+	}
+	JenkinsHtmlReport('html') {
+		outputFile = 'CodeNarcReport.html'
+		title = 'CodeNarc Report for Direct Labor Reporting System'
+	}
+}
+codenarc.propertiesFile = 'grails-app/conf/codenarc.properties'
+
