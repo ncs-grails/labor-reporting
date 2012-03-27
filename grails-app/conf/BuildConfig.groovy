@@ -12,7 +12,7 @@ grails.project.dependency.resolution = {
         // uncomment to disable ehcache
         // excludes 'ehcache'
     }
-    log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
 
     repositories {
@@ -41,11 +41,11 @@ grails.project.dependency.resolution = {
 
 		compile ":audit-logging:0.5.4"
 		compile ":spring-security-core:1.2.7.3"
-		compile ":spring-security-ldap:1.0.6"   
-		compile ":spring-security-shibboleth-native-sp:1.0.3"
+		//compile ":spring-security-ldap:1.0.6"   
+		//compile ":spring-security-shibboleth-native-sp:1.0.3"
 
 		// Do not compile in WAR
-		provided ":spring-security-mock:1.0.1" 
+		//provided ":spring-security-mock:1.0.1" 
 
 		// Test
 		test ":code-coverage:1.2.5"
