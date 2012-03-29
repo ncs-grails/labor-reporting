@@ -1,0 +1,5 @@
+/* fonts *******************************************************************************/
+
+.fontMaroon { color:maroon; } 
+.fontMaroonBold { color:maroon; font-weight:bold;}
+.fontSmaller { font-size:smaller; }

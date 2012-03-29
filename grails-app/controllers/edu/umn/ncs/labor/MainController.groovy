@@ -1,17 +1,15 @@
 package edu.umn.ncs.labor
-import org.joda.time.*
 import grails.plugins.springsecurity.Secured
 
 @Secured(['ROLE_NCS_IT', 'ROLE_NCS_DLR_MANAGE', 'ROLE_NCS_DLR'])
 class MainController {
 
 	def springSecurityService
-	//def laborService
+	def laborReportingService
 
 	def index = {
 
-		log.debug "MAIN CONTROLLER > INDEX ---------------------------------------"        
-		log.debug "=> params: ${params}"
+		log.debug "params: ${params}"
 
 		redirect(action: "show")
 
@@ -19,42 +17,16 @@ class MainController {
 
 	def show = {
 
-		log.debug "MAIN CONTROLLER > SHOW ----------------------------------------"        
-		log.debug "=> params: ${params}"
+		log.debug "params: ${params}"
  		
-		
-
-/*				
-
-		// REPORTING STAFF
+		// get login user
 		def principal = springSecurityService.principal                        
-		if (debug) {  log.debug "=> principal: ${principal}" }
+		log.debug "principal: ${principal}" 
 
-		def reportingStaffInstance = laborService.getReportingStaff(principal)
-		if (debug) { log.debug "=> reportingStaffInstance: ${reportingStaffInstance}" }
+		def personInstance = laborReportingService.getPerson(principal)
+		log.debug "personInstance: ${personInstance}" 
 
-		// REPORTING PERIOD
-		def reportingPeriodInstance = laborService.getCurrentReportingPeriod()
-		if (debug) { log.debug "=> reportingPeriodInstance: ${reportingPeriodInstance}" }            
-
-		// ASSIGNED EFFORT instance
-		def assignedEffortInstance = AssignedEffort.findByReportingStaffAndPeriod(reportingStaffInstance, reportingPeriodInstance)
-		if (debug) {  log.debug "=> assignedEffortInstance: ${assignedEffortInstance}"
-
-			if ( assignedEffortInstance ) {
-				log.debug "=> if ( assignedEffortInstance ) = TRUE"
-					log.debug "=> assignedEffortInstance.dateCommitted: ${assignedEffortInstance.dateCommitted}"
-			}
-
-		}
-
-		[
-		reportingStaffInstance: reportingStaffInstance,
-		reportingPeriodInstance: reportingPeriodInstance,
-		assignedEffortInstance: assignedEffortInstance
-		]
-
-*/		
+		[ personInstance: personInstance ]  
 
 	}            
 

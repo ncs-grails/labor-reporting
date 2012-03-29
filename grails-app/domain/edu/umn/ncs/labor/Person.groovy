@@ -39,11 +39,11 @@ class Person {
 	String toString() { fullNameLFM }
 
 	String getFullNameLFM() {
-		"${lastName}, ${firstName} ${middleInit ?: ''}".trim()
+		"${lastName}, ${firstName} ${middleInitial ?: ''}".trim()
 	}
 
 	String getFullNameFML() {
-		"${firstName} ${middleInit ?: ''} ${lastName}".trim()
+		"${firstName} ${middleInitial ?: ''} ${lastName}".trim()
 	}
 
     def onDelete = { oldMap ->
@@ -62,10 +62,8 @@ class Person {
             oldValue += ", dateCreated: ${oldMap.dateCreated}"
             oldValue += ", userCreated: ${oldMap.userCreated}"
             oldValue += ", appCreated: ${oldMap.appCreated} "
-        //println "PRINTLN ReportingStaffDomain.onDelete.oldValue: ${oldValue}"
 
         String className = this.class.toString().replace('class ', '')
-        //println "${now}\tAudit:DELETE::\t${oldValue}"
 
         def auditLogEventInstance = new AuditLogEvent(
             className: className,
@@ -78,7 +76,7 @@ class Person {
         )
         if ( ! auditLogEventInstance.save() ) {
             auditLogEventInstance.errors.each{
-                //println "${now}\tError Transacting DELETE:: \t ${it}"
+                log.debug "${now}\tError Transacting DELETE:: \t ${it}"
             }
         }
 

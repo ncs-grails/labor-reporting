@@ -14,7 +14,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 class LoginController {
 
-
 	/**
 	 * Dependency injection for the authenticationTrustResolver.
 	 */
@@ -29,15 +28,10 @@ class LoginController {
 	 * Default action; redirects to 'defaultTargetUrl' if logged in, /login/auth otherwise.
 	 */
 	def index = {
-
-		if (debug) {
-			log.debug "LOGIN CONTROLLER > INDEX ---------------------------------------"                   
-			log.debug "=> params: ${params}"
-		}
-
 		if (springSecurityService.isLoggedIn()) {
 			redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
-		} else {
+		}
+		else {
 			redirect '/'
 		}
 	}
@@ -46,27 +40,17 @@ class LoginController {
 	 * Show denied page.
 	 */
 	def denied = {
-
-		if (debug) {
-			log.debug "LOGIN CONTROLLER > DENIED ---------------------------------------"                   
-			log.debug "=> params: ${params}"
-		}
-
-		if (springSecurityService.isLoggedIn() && authenticationTrustResolver.isRememberMe(SCH.context?.authentication)) {
+		if (springSecurityService.isLoggedIn() &&
+				authenticationTrustResolver.isRememberMe(SCH.context?.authentication)) {
 			// have cookie but the page is guarded with IS_AUTHENTICATED_FULLY
 			redirect action: 'full', params: params
-		}
+				}
 	}
 
 	/**
 	 * Callback after a failed login. Redirects to the auth page with a warning message.
 	 */
 	def authfail = {
-
-		if (debug) {
-			log.debug "LOGIN CONTROLLER > AUTHFAIL ---------------------------------------"                   
-			log.debug "=> params: ${params}"
-		}
 
 		def username = session[UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY]
 		String msg = ''
@@ -75,22 +59,26 @@ class LoginController {
 		if (exception) {
 			if (exception instanceof AccountExpiredException) {
 				msg = g.message(code: "springSecurity.errors.login.expired")
-			} else if (exception instanceof CredentialsExpiredException) {
+			}
+			else if (exception instanceof CredentialsExpiredException) {
 				msg = g.message(code: "springSecurity.errors.login.passwordExpired")
-			} else if (exception instanceof DisabledException) {
+			}
+			else if (exception instanceof DisabledException) {
 				msg = g.message(code: "springSecurity.errors.login.disabled")
-			} else if (exception instanceof LockedException) {
+			}
+			else if (exception instanceof LockedException) {
 				msg = g.message(code: "springSecurity.errors.login.locked")
-			} else {
+			}
+			else {
 				msg = g.message(code: "springSecurity.errors.login.fail")
 			}
 		}
 
 		if (springSecurityService.isAjax(request)) {
 			render([error: msg] as JSON)
-		} else {
+		}
+		else {
 			[msg: msg, exception: exception, username: username]
 		}
 	}
-
 }
