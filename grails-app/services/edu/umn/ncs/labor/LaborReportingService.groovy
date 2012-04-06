@@ -6,27 +6,28 @@ class LaborReportingService {
 
 	def getPerson(principal) {
 
+		log.debug "BEGIN def getPerson(principal)"
+		
 		def uname = principal.getUsername()
-		log.debug "getPerson.uname: ${uname}" 
+		log.debug "  uname = ${uname}" 
 
 		def person = Person.findByUsername(uname)
-		log.debug "getPerson.person: ${person}" 
 
 		if ( !person ) {
 
-			log.debug "if(!person) = TRUE" 
+			log.debug "  if (!person)" 
 
 			person = new Person(username:uname)
-			log.debug "getPerson.person: ${person}" 
+			log.debug "  => person = ${person}" 
 
 			person.email = principal.getEmail()
-			log.debug "getPerson.person.email: ${person.email}" 
+			log.debug "  => person.email = ${person.email}" 
 
 			person.fullName = principal.getFullName()
-			log.debug "getPerson.person.fullName: ${person.fullName}" 
+			log.debug "  => person.fullName = ${person.fullName}" 
 
 			person.userCreated = uname
-			log.debug "getPerson.person.userCreated: ${person.userCreated}" 
+			log.debug "  => person.userCreated = ${person.userCreated}" 
 
 			def nameParts = person.fullName.tokenize()
 			if ( nameParts.size() == 2 ) {
@@ -38,20 +39,22 @@ class LaborReportingService {
 				person.middleInit = nameParts[1]
 				person.lastName = nameParts[2]
 			}
-			log.debug "getPerson.nameParts = ${nameParts.size()}" 
-			log.debug "getPerson.nameParts[0] = ${nameParts[0]}" 
-			log.debug "getPerson.nameParts[1] = ${nameParts[1]}" 
-			log.debug "getPerson.nameParts[2] = ${nameParts[2]}" 
+			log.debug " => nameParts.size() = ${nameParts.size()}" 
+			log.debug " => nameParts[0] = ${nameParts[0]}" 
+			log.debug " => nameParts[1] = ${nameParts[1]}" 
+			log.debug " => nameParts[2] = ${nameParts[2]}" 
 
 			person.save(flush:true)
 			if ( !person.save() ) {
 				person.errors.each{ println it }
 			}
 
-		} // if ( !person )
+		}  
 
+		log.debug "  person = ${person}"
+		log.debug "END def getPerson(principal)"
 		return person
 
-	} // getPerson()
+	} 
 
 }

@@ -9,7 +9,7 @@ class MainController {
 
 	def index = {
 
-		log.debug "params: ${params}"
+		log.debug "params = ${params}"
 
 		redirect(action: "show")
 
@@ -17,14 +17,14 @@ class MainController {
 
 	def show = {
 
-		log.debug "params: ${params}"
+		log.debug "params = ${params}"
  		
 		// get login user
 		def principal = springSecurityService.principal                        
-		log.debug "principal: ${principal}" 
+		log.debug "principal = ${principal}" 
 
 		def personInstance = laborReportingService.getPerson(principal)
-		log.debug "personInstance: ${personInstance}" 
+		log.debug "personInstance = ${personInstance}" 
 
 		[ personInstance: personInstance ]  
 
