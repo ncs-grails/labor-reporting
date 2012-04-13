@@ -1,13 +1,15 @@
-
-<%@ page import="edu.umn.ncs.Title" %>
+<%@ page import="edu.umn.ncs.labor.Title" %>
 <!doctype html>
 <html>
+
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="ncs">
 		<g:set var="entityName" value="${message(code: 'title.label', default: 'Title')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
+
 	<body>
+
 		<a href="#show-title" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
@@ -32,5 +34,7 @@
 				</fieldset>
 			</g:form>
 		</div>
+
 	</body>
+
 </html>

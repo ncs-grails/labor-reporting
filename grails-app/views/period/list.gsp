@@ -1,5 +1,4 @@
-
-<%@ page import="edu.umn.ncs.Period" %>
+<%@ page import="edu.umn.ncs.labor.Period" %>
 <!doctype html>
 <html>
 	<head>

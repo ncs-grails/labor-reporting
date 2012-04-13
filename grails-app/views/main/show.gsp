@@ -10,15 +10,18 @@
 
 	<body>
 
-
 		<!-- Navigation -->
+		<div class="breadcrumbs">
+			<g:link controller="applicationManagement" action="list">Application Management</g:link>
+		</div>
 
-		<!-- page title -->
-		<h1>Direct Labor Reporting</h1>
+		<!-- Title -->
+		<h1>Labor Reporting</h1>
 
 		<!-- Greeting -->
-		<span class="fontMaroon">Hello ${personInstance.firstName} ${personInstance.lastName}!</span> 
+		Hello ${personInstance.firstName} ${personInstance.lastName}!
 
+		<g:render template="/submission/currentEffort" />
 		<g:render template="/submission/pastEffort" />
 
 	</body>

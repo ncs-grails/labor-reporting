@@ -1,4 +1,3 @@
-
 <%@ page import="edu.umn.ncs.labor.Task" %>
 <!doctype html>
 <html>

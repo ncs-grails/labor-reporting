@@ -1,9 +1,9 @@
+<%@ page import="edu.umn.ncs.labor.Person" %>
 
-<%@ page import="edu.umn.ncs.Person" %>
 <!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="ncs">
 		<g:set var="entityName" value="${message(code: 'person.label', default: 'Person')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
