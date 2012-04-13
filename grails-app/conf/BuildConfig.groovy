@@ -53,6 +53,7 @@ grails.project.dependency.resolution = {
 		test ":code-coverage:1.2.5"
 		test ":codenarc:0.16.1"
     }
+
 }
 
 codenarc.reports = {

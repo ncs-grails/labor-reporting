@@ -12,6 +12,7 @@ class LaborReportingService {
 		log.debug "  uname = ${uname}" 
 
 		def person = Person.findByUsername(uname)
+		log.debug "  person = ${person}" 
 
 		if ( !person ) {
 

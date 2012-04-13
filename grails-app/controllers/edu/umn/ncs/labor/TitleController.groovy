@@ -9,12 +9,50 @@ class TitleController {
    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
+
+		log.debug "params: ${params}"
         redirect(action: "list", params: params)
+
     }
 
     def list() {
+		
+		log.debug "params: ${params}"
+
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [titleInstanceList: Title.list(params), titleInstanceTotal: Title.count()]
+		log.debug "params.max: ${params.max}"
+
+		def cl = Title.createCriteria()
+		def titleInstanceList = cl.list {
+			eq("active", true)
+			order("name", "asc")
+		}
+		log.debug "titleInstanceList = ${titleInstanceList}"
+
+		def cg = Title.createCriteria()
+		def titleInstanceTotal = cg.get {
+			eq("active", true)
+			projections {
+				count("id")
+			}
+		}
+		log.debug "titleInstanceTotal = ${titleInstanceTotal}"
+
+		[ titleInstanceList: titleInstanceList, titleInstanceTotal: titleInstanceTotal ]
+		
+    }
+
+    def show() {
+
+        def titleInstance = Title.get(params.id)
+        if (!titleInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'title.label', default: 'Title'), params.id])
+            redirect(action: "list")
+            return
+        }
+
+        [titleInstance: titleInstance]
+
     }
 
     def create() {
@@ -30,17 +68,6 @@ class TitleController {
 
 		flash.message = message(code: 'default.created.message', args: [message(code: 'title.label', default: 'Title'), titleInstance.id])
         redirect(action: "show", id: titleInstance.id)
-    }
-
-    def show() {
-        def titleInstance = Title.get(params.id)
-        if (!titleInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'title.label', default: 'Title'), params.id])
-            redirect(action: "list")
-            return
-        }
-
-        [titleInstance: titleInstance]
     }
 
     def edit() {

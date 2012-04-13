@@ -1,5 +1,29 @@
 /* fonts *******************************************************************************/
 
+h1, h2, h3, h4, h5 { color:maroon }
+h1 { text-align:center  }
+h2 {
+	margin: 1em 0;
+    border-bottom: .05em solid maroon;  
+    padding: .25em 0;
+}
+
 .fontMaroon { color:maroon; } 
 .fontMaroonBold { color:maroon; font-weight:bold;}
 .fontSmaller { font-size:smaller; }
+
+
+
+
+.breadcrumbs {
+	margin-top:1em;
+	margin-bottom:1.5em;
+	border-top:.1em solid silver;
+	border-bottom:.1em solid silver;
+	padding-top:.25em;
+	padding-bottom:.25em;
+	color:gray;
+	font-size:.75em;
+	font-style:normal;
+}
+

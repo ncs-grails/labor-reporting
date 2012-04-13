@@ -13,7 +13,15 @@ class PersonController {
     }
 
     def list() {
+
+		log.debug "paras: ${params}"
+
+		log.debug "params.max = ${params.max}"
+		log.debug "params.int('max') = ${params.int('max')}"
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
+
+		log.debug "params.max = ${params.max}"
+
         [personInstanceList: Person.list(params), personInstanceTotal: Person.count()]
     }
 
