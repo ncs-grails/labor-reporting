@@ -22,6 +22,8 @@ class Title {
 		appCreated(blank:false, maxSize:60)
     }
 
+    static mapping = { sort "name" }
+
     def onDelete = { oldMap ->
 
         def now = new Date()

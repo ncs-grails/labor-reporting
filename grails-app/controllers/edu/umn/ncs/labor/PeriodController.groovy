@@ -9,14 +9,27 @@ class PeriodController {
    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
+		log.debug "params = ${params}"
         redirect(action: "list", params: params)
     }
 
     def list() {
+
+		log.debug "params = ${params}"
+
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [periodInstanceList: Period.list(params), periodInstanceTotal: Period.count()]
+		log.debug "params.max = ${params.max}"
+        
+		def q = Period.where {
+		}
+
+
+		[periodInstanceList: Period.list(params), periodInstanceTotal: Period.count()]
+
+
     }
 
+/*	
     def create() {
         [periodInstance: new Period(params)]
     }
@@ -102,4 +115,6 @@ class PeriodController {
             redirect(action: "show", id: params.id)
         }
     }
+*/
+
 }

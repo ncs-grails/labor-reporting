@@ -8,12 +8,14 @@ class Period {
 
 	Date startDate
 	Date endDate
+	PeriodType type
 
 	String toString () { "${startDate} - ${endDate}" }
 
     static constraints = {
 		startDate()
 		endDate()
+
     }
 
 	static hasMany = [assignment: Assignment]
@@ -25,10 +27,9 @@ class Period {
         String oldValue = "Period"
             oldValue += ", startDate: ${oldMap.startDate}"
             oldValue += ", endDate: ${oldMap.endDate} "
-        //println "PRINTLN ReportingPeriodDomain.onDelete.oldValue: ${oldValue}"
+            oldValue += ", periodType: ${oldMap.periodType} "
 
         String className = this.class.toString().replace('class ', '')
-        //println "${now}\tAudit:DELETE::\t${oldValue}"
 
         def auditLogEventInstance = new AuditLogEvent(
             className: className,
@@ -42,7 +43,7 @@ class Period {
 
         if ( ! auditLogEventInstance.save() ) {
             auditLogEventInstance.errors.each{
-                //println "${now}\tError Transacting DELETE:: \t ${it}"
+                log.debug "${now}\tError Transacting DELETE:: \t ${it}"
             }
         }
 

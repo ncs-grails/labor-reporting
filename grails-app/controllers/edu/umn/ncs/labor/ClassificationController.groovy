@@ -9,14 +9,31 @@ class ClassificationController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
+
+		log.debug "params = ${params}"
+
         redirect(action: "list", params: params)
+
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [classificationInstanceList: Classification.list(params), classificationInstanceTotal: Classification.count()]
+
+		log.debug "params: ${params}"
+
+		params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		log.debug "params.max: ${params.max}"
+
+		def classificationInstanceList = Classification.findAllWhere(active: true)
+		log.debug "classificationInstanceList = ${classificationInstanceList}"
+
+		def classificationInstanceTotal = Classification.countByActive(true)
+		log.debug "classificationInstanceTotal = ${classificationInstanceTotal}"
+
+        [classificationInstanceList: classificationInstanceList, classificationInstanceTotal: classificationInstanceTotal]
+
     }
 
+/*	
     def create() {
         [classificationInstance: new Classification(params)]
     }
@@ -102,4 +119,7 @@ class ClassificationController {
             redirect(action: "show", id: params.id)
         }
     }
+
+*/
+	
 }

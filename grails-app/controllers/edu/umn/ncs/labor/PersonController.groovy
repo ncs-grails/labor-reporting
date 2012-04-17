@@ -9,22 +9,54 @@ class PersonController {
    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
+
+		log.debug "params = ${params}"
+
         redirect(action: "list", params: params)
+
     }
 
     def list() {
 
 		log.debug "paras: ${params}"
 
-		log.debug "params.max = ${params.max}"
-		log.debug "params.int('max') = ${params.int('max')}"
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-
 		log.debug "params.max = ${params.max}"
 
-        [personInstanceList: Person.list(params), personInstanceTotal: Person.count()]
+        def personInstanceList = Person.list(params)
+		log.debug "personInstanceList = ${personInstanceList}"
+
+		def personInstanceTotal = Person.count()
+		log.debug "personInstanceTotal = ${personInstanceTotal}"
+
+		[ personInstanceList: personInstanceList, personInstanceTotal: personInstanceTotal ]
+
     }
 
+    def edit() {
+
+		log.debug "params: ${params}"
+
+        def personInstance = Person.get(params.id)
+		log.debug "personInstance: ${personInstance}"
+
+        if (!personInstance) {
+		log.debug "if (!personInstance)"
+
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'person.label', default: 'Person'), params.id])
+			log.debug "  => flash.message: ${flash.message}"
+            
+			redirect(action: "list")
+            
+			return
+
+        }
+
+        [personInstance: personInstance]
+
+    }
+
+/*	
     def create() {
         [personInstance: new Person(params)]
     }
@@ -44,17 +76,6 @@ class PersonController {
         def personInstance = Person.get(params.id)
         if (!personInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'person.label', default: 'Person'), params.id])
-            redirect(action: "list")
-            return
-        }
-
-        [personInstance: personInstance]
-    }
-
-    def edit() {
-        def personInstance = Person.get(params.id)
-        if (!personInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'person.label', default: 'Person'), params.id])
             redirect(action: "list")
             return
         }
@@ -110,4 +131,6 @@ class PersonController {
             redirect(action: "show", id: params.id)
         }
     }
+*/
+
 }

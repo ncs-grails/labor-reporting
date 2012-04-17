@@ -1,4 +1,4 @@
-<%@ page import="edu.umn.ncs.Title" %>
+<%@ page import="edu.umn.ncs.labor.Title" %>
 
 
 

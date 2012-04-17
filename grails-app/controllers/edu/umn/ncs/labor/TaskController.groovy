@@ -7,14 +7,30 @@ class TaskController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
-        redirect(action: "list", params: params)
+
+		log.debug "params = ${params}"
+        
+		redirect(action: "list", params: params)
+
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [taskInstanceList: Task.list(params), taskInstanceTotal: Task.count()]
+
+		log.debug "params: ${params}"
+
+		params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		log.debug "params.max: ${params.max}"
+
+		def taskInstanceList = Task.findAllWhere(active: true)
+		log.debug "taskInstanceList = ${taskInstanceList}"
+
+		def taskInstanceTotal = Task.countByActive(true)
+		log.debug "taskInstanceTotal = ${taskInstanceTotal}"
+
+        [taskInstanceList: taskInstanceList, taskInstanceTotal: taskInstanceTotal]
     }
 
+/*	
     def create() {
         [taskInstance: new Task(params)]
     }
@@ -100,4 +116,6 @@ class TaskController {
             redirect(action: "show", id: params.id)
         }
     }
+*/
+
 }
