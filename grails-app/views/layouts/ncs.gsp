@@ -35,6 +35,9 @@
 
 		<g:layoutHead />
 		<g:javascript library="application" />
+
+		<r:layoutResources/>
+
 	</head>
 	<body class="center">
 
@@ -128,5 +131,8 @@
 			<br class="clearabove" />
 		</div>
 		<!-- END UofM FOOTER -->
+		<r:layoutResources/>
+
 	</body>
+
 </html>

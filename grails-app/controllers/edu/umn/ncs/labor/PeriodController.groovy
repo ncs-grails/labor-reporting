@@ -20,11 +20,27 @@ class PeriodController {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
 		log.debug "params.max = ${params.max}"
         
+/*
+		def now = new Date()
+		log.debug "now = ${now}"
+
 		def q = Period.where {
+			startDate < now
 		}
+		log.debug "q = ${q}"
+		def periodInstanceList = q.list(sort:"startDate")
+		log.debug "periodInstanceList = ${periodInstanceList}"
+*/
+		def periodTypeInstance = PeriodType.findByType.where {
+			name = "Month"
+		}
+		log.debug "periodTypeInstance = ${periodTypeInstance}"
 
+		def periodInstanceList = Period.findAllByType(periodTypeInstance, [sort:"startDate", order:"desc"])
+		log.debug "periodInstanceList = ${periodInstanceList}"
 
-		[periodInstanceList: Period.list(params), periodInstanceTotal: Period.count()]
+		//[periodInstanceList: periodInstanceList, periodInstanceTotal: Period.count()]
+		[ periodInstanceList: periodInstanceList ]
 
 
     }

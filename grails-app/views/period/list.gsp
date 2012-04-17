@@ -3,7 +3,7 @@
 <html>
 
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="ncs">
 		<g:set var="entityName" value="${message(code: 'period.label', default: 'Period')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
@@ -30,7 +30,9 @@
 			<table>
 				<thead>
 					<tr>
-					
+						<th>Id</th>	
+						<th>Description</th>	
+						<th>Type</th>	
 					</tr>
 				</thead>
 				<tbody>

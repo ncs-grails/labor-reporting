@@ -7,10 +7,15 @@ class BootStrap {
 		environments {
 
 			development {
-				//Period
-				def period2012January = new Period(startDate:'1/1/2012', endDate:'1/31/2012').save(failOnError:true)
-				def period2012February = new Period(startDate:'2/1/2012', endDate:'2/29/2012').save(failOnError:true)
-				def period2012March = new Period(startDate:'3/1/2012', endDate:'2/31/2012').save(failOnError:true)
+
+				// Period Type
+				def periodTypeCalendarWeek = new PeriodType(name:'Week').save(failOnError:true)
+				def periodTypeCalendarMonth = new PeriodType(name:'Month').save(failOnError:true)
+
+				// Period
+				def period2012January = new Period(startDate:'1/1/2012', endDate:'1/31/2012', type:periodTypeCalendarMonth).save(failOnError:true)
+				def period2012February = new Period(startDate:'2/1/2012', endDate:'2/29/2012', type:periodTypeCalendarMonth).save(failOnError:true)
+				def period2012March = new Period(startDate:'3/1/2012', endDate:'2/31/2012', type:periodTypeCalendarMonth).save(failOnError:true)
 
 				// Title
 				def titleAdministrator = new Title(name:'Administrator', active:true, dateCreated:'4/1/2012', userCreated:'will1945', appCreated:'labor-reporting').save(failOnError:true)

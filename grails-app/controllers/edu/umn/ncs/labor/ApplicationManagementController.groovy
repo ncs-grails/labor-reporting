@@ -10,7 +10,6 @@ class ApplicationManagementController {
 	def index = {
 
 		log.debug "params = ${params}"
-		println "APPLICATION MANAGEMENT CONTROLLER > index"
 
 		redirect(action: "list", params: params)
 
@@ -19,9 +18,7 @@ class ApplicationManagementController {
 	def list = {
 
 		log.debug "params = ${params}"
-		println "APPLICATION MANAGEMENT CONTROLLER > list"
  		
-		// login user
 		def principal = springSecurityService.principal                        
 		log.debug "principal = ${principal}" 
 
