@@ -5,15 +5,22 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="layout" content="ncs" />
 		<title>Application Management for Labor Reporting</title>
-		<link rel="stylesheet" type="text/css" href="${resource(dir:'css', file:'labor_reporting.css')}" />
+		<link rel="stylesheet" type="text/css" href="${resource(dir:'css', file:'labor-reporting.css')}" />
 	</head>
 
 	<body>
 
-		<!-- GREETING -->
-		<span class="fontMaroon">Hello ${personInstance.firstName} ${personInstance.lastName}!</span> 
+		<!-- NAVIGATION -->
+		<sec:ifAnyGranted roles="ROLE_NCS_IT,ROLE_NCS_DLR_MANAGE">
+			<div class="breadcrumbs">
+				<g:link controller="main" action="show">DLR Home</g:link>
+			</div>
+		</sec:ifAnyGranted>
+		
+		<!-- TITLE -->
+		<h1>Application Management</h1>
 
-		<sec:ifAnyGranted roles="ROLE_NCS_IT,ROLE_NCS_DLR_MANAGE"></sec:ifAnyGranted>
+		<sec:ifAnyGranted roles="ROLE_NCS_IT,ROLE_NCS_DLR_MANAGE">
 
 			<!-- MENU SELECTION -->
 			<dl>
@@ -47,7 +54,11 @@
 
 			</dl>
 
-		<sec:ifAnyGranted roles="ROLE_NCS_IT,ROLE_NCS_DLR_MANAGE"></sec:ifAnyGranted>
+		</sec:ifAnyGranted>
+
+		<sec:ifNotGranted roles="ROLE_NCS" >
+			<p>Access denied</p>
+		</sec:ifNotGranted>
 
 	</body>
 

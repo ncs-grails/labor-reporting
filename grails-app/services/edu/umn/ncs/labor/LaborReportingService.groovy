@@ -1,4 +1,5 @@
 package edu.umn.ncs.labor
+import org.joda.time.*
 
 class LaborReportingService {
 
@@ -56,6 +57,29 @@ class LaborReportingService {
 		log.debug "END def getPerson(principal)"
 		return person
 
-	} 
+	} // getPerson(principal)
+
+
+	def getCurrentPeriodOfTypeMonth() {
+
+		log.debug "BEGIN def getCurrentPeriodOfTypeMonth"
+
+		def today = new DateMidnight()	
+		log.debug " => today = ${today}"
+
+		def lastMonth = today.minusMonths(1)
+		log.debug " => lastMonth = ${lastMonth}"
+
+		def lastMonthFirstDay = lastMonth.minusDays(lastMonth.dayOfMonth-1).toCalendar().getTime()
+		log.debug " => lastMonthFirstDay = ${lastMonthFirstDay}"
+
+		def currentPeriodInstance = Period.findByStartDate(lastMonthFirstDay)
+		log.debug " => currentPeriodInstance = ${currentPeriodInstance}"
+
+		log.debug "END def getCurrentPeriodOfTypeMonth"
+
+		return currentPeriodInstance
+	
+	}
 
 }

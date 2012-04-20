@@ -5,23 +5,28 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="layout" content="ncs" />
 		<title>National Children's Study -  Direct Labor Reporting</title>
-		<link rel="stylesheet" type="text/css" href="${resource(dir:'css', file:'labor_reporting.css')}" />
+		<link rel="stylesheet" type="text/css" href="${resource(dir:'css', file:'labor-reporting.css')}" />
 	</head>
 
 	<body>
 
-		<!-- Navigation -->
-		<div class="breadcrumbs">
-			<g:link controller="applicationManagement" action="list">Application Management</g:link>
-		</div>
+		<!-- NAVIGATION -->
+		<sec:ifAnyGranted roles="ROLE_NCS_IT,ROLE_NCS_DLR_MANAGE">
+			<div class="breadcrumbs">
+				<g:link controller="applicationManagement" action="list">Application Management</g:link>
+			</div>
+		</sec:ifAnyGranted>		
 
-		<!-- Title -->
+		<!-- TITLE -->
 		<h1>Labor Reporting</h1>
 
-		<!-- Greeting -->
+		<!-- GREETING -->
 		Hello ${personInstance.firstName} ${personInstance.lastName}!
 
+		<!-- CURRENT EFFORT TO REPORT  -->
 		<g:render template="/submission/currentEffort" />
+
+		<!-- PAST REPORTED EFFORT  -->
 		<g:render template="/submission/pastEffort" />
 
 	</body>

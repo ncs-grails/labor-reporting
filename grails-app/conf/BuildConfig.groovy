@@ -45,6 +45,7 @@ grails.project.dependency.resolution = {
 		compile ":spring-security-ldap:1.0.6"   
 		compile ":spring-security-shibboleth-native-sp:1.0.3"
 		compile ":ncs-web-template:0.2.1"
+		compile ":joda-time:1.4"
 
 		// Do not compile in WAR
 		compile ":spring-security-mock:1.0.1" 

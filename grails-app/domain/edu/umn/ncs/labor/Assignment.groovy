@@ -14,7 +14,7 @@ class Assignment {
 	Date dateCreated = new Date()
 	Person userCreated
 	String appCreated = 'labor-reporting'
-	Person staff
+	Person person
 	Date certifyDate
 	Person certifier
 
@@ -24,7 +24,7 @@ class Assignment {
 		dateCreated()
 		userCreated(blank:false)
 		appCreated(blank:false)
-		staff(blank:false)
+		person()
 		certifyDate(nullable:true)
 		certifier(blank:true)
     }
@@ -42,14 +42,14 @@ class Assignment {
             oldValue += ", dateCreated: ${oldMap.dateCreated}"
             oldValue += ", userCreated ${oldMap.userCreated}"
             oldValue += ", appCreated: ${oldMap.appCreated}"
-            oldValue += ", staff ${oldMap.staff}"
+            oldValue += ", person ${oldMap.person}"
             oldValue += ", certifyDate: ${oldMap.certifyDate}"
             oldValue += ", certifier: "
             oldValue += "${oldMap.certifier}" ? "${null} " : "${oldMap.certifier} "
-        //println "PRINTLN ReportingStaffDomain.onDelete.oldValue: ${oldValue}"
+        	log.debug "ReportingStaffDomain.onDelete.oldValue: ${oldValue}"
 
         String className = this.class.toString().replace('class ', '')
-        //println "${now}\tAudit:DELETE::\t${oldValue}"
+        	log.debug "${now}\tAudit:DELETE::\t${oldValue}"
 
         def auditLogEventInstance = new AuditLogEvent(
             className: className,
@@ -63,7 +63,7 @@ class Assignment {
 
         if ( ! auditLogEventInstance.save() ) {
             auditLogEventInstance.errors.each{
-                //println "${now}\tError Transacting DELETE:: \t ${it}"
+                log.debug "${now}\tError Transacting DELETE:: \t ${it}"
             }
         }
 

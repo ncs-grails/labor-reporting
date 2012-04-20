@@ -12,14 +12,12 @@ class AssignmentController {
 
     def index() {
 		
-		if (debug) {
-			log.debug "ASSIGNMENT CONTROLLER > INDEX ---------------------------------------"        
-			log.debug "=> params: ${params}"
-		}        		
+		log.debug "params: ${params}"
 
         redirect(action: "list", params: params)
-    }
-
+    
+	}
+/*
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [assignmentInstanceList: Assignment.list(params), assignmentInstanceTotal: Assignment.count()]
@@ -39,18 +37,25 @@ class AssignmentController {
 		flash.message = message(code: 'default.created.message', args: [message(code: 'assignment.label', default: 'Assignment'), assignmentInstance.id])
         redirect(action: "show", id: assignmentInstance.id)
     }
-
+*/
     def show() {
+
+		log.debug "params: ${params}"
+	
+
+/*
         def assignmentInstance = Assignment.get(params.id)
         if (!assignmentInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'assignment.label', default: 'Assignment'), params.id])
             redirect(action: "list")
             return
         }
-
         [assignmentInstance: assignmentInstance]
+*/
+
     }
 
+/*
     def edit() {
         def assignmentInstance = Assignment.get(params.id)
         if (!assignmentInstance) {
@@ -110,4 +115,6 @@ class AssignmentController {
             redirect(action: "show", id: params.id)
         }
     }
+*/
+
 }

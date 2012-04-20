@@ -8,21 +8,12 @@ class BootStrap {
 
 			development {
 
-				// Period Type
-				def periodTypeCalendarWeek = new PeriodType(name:'Week').save(failOnError:true)
-				def periodTypeCalendarMonth = new PeriodType(name:'Month').save(failOnError:true)
-
-				// Period
-				def period2012January = new Period(startDate:'1/1/2012', endDate:'1/31/2012', type:periodTypeCalendarMonth).save(failOnError:true)
-				def period2012February = new Period(startDate:'2/1/2012', endDate:'2/29/2012', type:periodTypeCalendarMonth).save(failOnError:true)
-				def period2012March = new Period(startDate:'3/1/2012', endDate:'2/31/2012', type:periodTypeCalendarMonth).save(failOnError:true)
-
 				// Title
 				def titleAdministrator = new Title(name:'Administrator', active:true, dateCreated:'4/1/2012', userCreated:'will1945', appCreated:'labor-reporting').save(failOnError:true)
-				def titleITCoordinator = new Title(name:'IT Coordinator', active:true, userCreated:'sqv').save(failOnError:true)
-				def titleConsultant = new Title(name:'Consultant', active:true, userCreated:'sqv').save(failOnError:true)
-				def titleDataAnalyst = new Title(name:'Data Analysis', active:true, userCreated:'sqv').save(failOnError:true)
-				def titleOther = new Title(name:'Other', active:true, userCreated:'sqv').save(failOnError:true)
+				def titleITCoordinator = new Title(name:'IT Coordinator', active:true, userCreated:'will1945').save(failOnError:true)
+				def titleConsultant = new Title(name:'Consultant', active:true, userCreated:'will1945').save(failOnError:true)
+				def titleDataAnalyst = new Title(name:'Data Analysis', active:true, userCreated:'will1945').save(failOnError:true)
+				def titleOther = new Title(name:'Other', active:true, userCreated:'will1945').save(failOnError:true)
 
 				// Person
 				def personWill1945 = new Person(
@@ -34,7 +25,7 @@ class BootStrap {
 					title:titleAdministrator,
 					email:'sqv@cccs.umn.edu',
 					reportsEffort:true,
-					userCreated:'ajz'
+					userCreated:'will1945'
 				).save(failOnError:true)
 				def personSqv = new Person(
 					lastName:'Vuong', 
@@ -45,8 +36,30 @@ class BootStrap {
 					title:titleDataAnalyst,
 					email:'sqv@cccs.umn.edu',
 					reportsEffort:true,
-					userCreated:'ajz'
+					userCreated:'will1945'
 				).save(failOnError:true)
+				def personNgp = new Person(
+					lastName:'Portnov', 
+					firstName:'Natalya', 
+					middleInitial:'G', 
+					fullName:'Natalya G Portnov',
+					username:'ngp',
+					title:titleOther,
+					email:'sqv@cccs.umn.edu',
+					reportsEffort:true,
+					userCreated:'will1945'
+				).save(failOnError:true)
+				log.debug "personNgp = ${personNgp}"
+
+				// Period Type
+				def periodTypeCalendarWeek = new PeriodType(name:'Week').save(failOnError:true)
+				def periodTypeCalendarMonth = new PeriodType(name:'Month').save(failOnError:true)
+
+				// Period
+				def period2012January = new Period(startDate:'1/1/2012', endDate:'1/31/2012', type:periodTypeCalendarMonth).save(failOnError:true)
+				def period2012February = new Period(startDate:'2/1/2012', endDate:'2/29/2012', type:periodTypeCalendarMonth).save(failOnError:true)
+				def period2012March = new Period(startDate:'3/1/2012', endDate:'3/31/2012', type:periodTypeCalendarMonth).save(failOnError:true)
+				def period2012April = new Period(startDate:'4/1/2012', endDate:'4/30/2012', type:periodTypeCalendarMonth).save(failOnError:true)
 
 				// Classification
 				def classCoin = new Classification(name:'COIN Project', active:true, userCreated:'will1945').save(failOnError:true) 
@@ -62,12 +75,29 @@ class BootStrap {
 				def typeOde = new TaskType(name:'Operations Data Elements', active:true, userCreated:'will1945').save(failOnError:true)
 
 				// Task
-				def taskAdministrative = new Task(name:'Administrative', type:typeSfr, active:true, userCreated:'sqv').save(failOnError:true) 
-				def taskMeeting = new Task(name:'Meeting', type:typeSfr, active:true, userCreated:'sqv').save(failOnError:true) 
-				def taskData = new Task(name:'Data Coolection', type:typeSfr, active:true, userCreated:'sqv').save(failOnError:true) 
-				def taskInformaticsManagement = new Task(name:'Informatics Management', type:typeSfr, active:true, userCreated:'sqv').save(failOnError:true) 
-				def taskTraining = new Task(name:'Training', type:typeSfr, active:true, userCreated:'sqv').save(failOnError:true) 
+				def taskAdministrative = new Task(name:'Administrative', type:typeSfr, active:true, userCreated:'will1945').save(failOnError:true) 
+				def taskMeeting = new Task(name:'Meeting', type:typeSfr, active:true, userCreated:'will1945').save(failOnError:true) 
+				def taskData = new Task(name:'Data Coolection', type:typeSfr, active:true, userCreated:'will1945').save(failOnError:true) 
+				def taskInformaticsManagement = new Task(name:'Informatics Management', type:typeSfr, active:true, userCreated:'will1945').save(failOnError:true) 
+				def taskTraining = new Task(name:'Training', type:typeSfr, active:true, userCreated:'will1945').save(failOnError:true) 
 
+				// Effort Assignment
+				def assignment201203Ngp = new Assignment(
+					period:period2012April,
+					percentEffort:45.5,
+					dateCreated:'04/04/2012',
+					userCreated:personWill1945,
+					person:personNgp,
+					certifyDate:'04/21/2012',
+					certifier:personNgp).save(failOnError:true) 
+				def assignment201203Sqv = new Assignment(
+					period:period2012March,
+					percentEffort:75,
+					dateCreated:'04/04/2012',
+					userCreated:personWill1945,
+					person:personSqv,
+					certifyDate:'04/20/2012',
+					certifier:personSqv).save(failOnError:true) 
 
 			} //development
 
