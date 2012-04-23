@@ -23,36 +23,45 @@
 		<sec:ifAnyGranted roles="ROLE_NCS_IT,ROLE_NCS_DLR_MANAGE">
 
 			<!-- MENU SELECTION -->
-			<dl>
 
-				<!-- effort assignment -->
-				<dt class="basicMenu"><g:link controller="assignment" action="show">Effort Assignment</g:link> - enter assigned effort for reporting period</dt>
+				<h2>Main</h2>
 
-				<!-- reported effort -->
-				<dt class="basicMenu"><g:link controller="submission" action="list">Reported Effort</g:link> - add, view and edit reported effort</dt>
+				<ul>
 
-				<!-- staff -->
-				<dt class="basicMenu"><g:link controller="person" action="list">Staff Information</g:link> - add, view and edit staff information</dt>
+					<!-- effort assignment -->
+					<li class="basicMenu"><g:link controller="assignment" action="show">Effort Assignment</g:link> - enter assigned effort for reporting period</li>
 
-				<!-- job title -->
-				<dt class="basicMenu"><g:link controller="title" action="list">Job Title</g:link> - add, view and edit job titles</dt>
+					<!-- reported effort -->
+					<li class="basicMenu"><g:link controller="submission" action="list">Reported Effort</g:link> - add, view and edit reported effort</li>
 
-				<!-- reporting period -->
-				<dt class="basicMenu"><g:link controller="period" action="list">Reporting Period</g:link> - view reporting periods</dt>
+					<!-- staff -->
+					<li class="basicMenu"><g:link controller="person" action="list">Staff Information</g:link> - add, view and edit staff information</li>
 
-				<!-- clasification -->
-				<dt class="basicMenu"><g:link controller="classification" action="list">Classification</g:link> - add, view and edit classification</dt>
+					<!-- job title -->
+					<li class="basicMenu"><g:link controller="title" action="list">Job Title</g:link> - add, view and edit job titles</li>
 
-				<!-- task -->
-				<dt class="basicMenu"><g:link controller="task" action="list">Task</g:link> - add, view and edit task</dt>
+					<!-- reporting period -->
+					<li class="basicMenu"><g:link controller="period" action="list">Reporting Period</g:link> - view reporting periods</li>
 
-				<!-- reference invoice number -->
-				<dt class="basicMenu"><g:link controller="reportingPeriodedit list">Reference Invoice Number	</g:link> - enter the RIN for each reporting period</dt>
+					<!-- clasification -->
+					<li class="basicMenu"><g:link controller="classification" action="list">Classification</g:link> - add, view and edit classification</li>
 
-				<!-- reports -->
-				<dt class="basicMenu"><g:link action="report">Reports</g:link> - view and edit report properties, view completed reports, and generate reports for dissemination</dt>
+					<!-- task -->
+					<li class="basicMenu"><g:link controller="task" action="list">Task</g:link> - add, view and edit task</li>
 
-			</dl>
+					<!-- reports -->
+					<li class="basicMenu"><g:link action="report">Reports</g:link> - view and edit report properties, view completed reports, and generate reports for dissemination</li>
+
+				</ul>
+
+				<h2>Reporting Source Specific</h2>
+
+				<ul>
+
+					<!-- reference invoice number -->
+					<li class="basicMenu"><g:link controller="reportingPeriodedit list">Reference Invoice Number (RIN) for Sponsored Financial Reporting (SFR)</g:link> - enter the RIN for each reporting period</li>
+
+				</ul>
 
 		</sec:ifAnyGranted>
 

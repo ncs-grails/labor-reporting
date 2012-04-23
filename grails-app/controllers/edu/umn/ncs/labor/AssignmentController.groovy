@@ -7,14 +7,14 @@ class AssignmentController {
 	static scaffold = true
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-	
-	def debug = true
+		
+	def laborReportingService
 
     def index() {
 		
 		log.debug "params: ${params}"
 
-        redirect(action: "list", params: params)
+        redirect(action: "show", params: params)
     
 	}
 /*
@@ -31,7 +31,8 @@ class AssignmentController {
         def assignmentInstance = new Assignment(params)
         if (!assignmentInstance.save(flush: true)) {
             render(view: "create", model: [assignmentInstance: assignmentInstance])
-            return
+    def laborReportingService
+	return
         }
 
 		flash.message = message(code: 'default.created.message', args: [message(code: 'assignment.label', default: 'Assignment'), assignmentInstance.id])
@@ -41,7 +42,18 @@ class AssignmentController {
     def show() {
 
 		log.debug "params: ${params}"
+
+		/* DATA FOR ASSIGNED EFFORT TABLE ***********************************************************************************/
 	
+		// period (defaults to current period, if none is selected)
+		def periodInstance = Period.read(params?.periodInstance?.id)
+		if ( !periodInstance ) {
+			periodInstance = laborReportingService.getCurrentPeriodOfTypeMonth()
+		}
+		log.debug "periodInstance: ${periodInstance}"
+
+		[ periodInstance: periodInstance ]
+
 
 /*
         def assignmentInstance = Assignment.get(params.id)

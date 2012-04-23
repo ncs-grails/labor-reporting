@@ -16,8 +16,8 @@ h2 {
 .breadcrumbs {
 	margin-top:1em;
 	margin-bottom:1.5em;
-	border-top:.1em solid silver;
-	border-bottom:.1em solid silver;
+	border-top:.1em solid lightgrey;
+	border-bottom:.1em solid lightgrey;
 	padding-top:.25em;
 	padding-bottom:.25em;
 	color:gray;
@@ -25,10 +25,23 @@ h2 {
 	font-style:normal;
 }
 
-/* menu  ******************************************************************************/
+/* lists  ******************************************************************************/
 dt.basicMenu {
-	margin:.75em 0;
+	margin:1em 0;
 	width:100%;
+	color:maroon;
+	font-weight:bold;
+}
+dd.basicMenu {
+	float:right;
+	margin-bottom:1em;
+	width:100%;
+	color: gray;
+}
+
+li.basicMenu {
+	list-style-type:none;
+	margin-bottom:.75em;
 	color:gray;
 }
 

@@ -20,22 +20,15 @@ class SubmissionController {
 		log.debug "params: ${params}"
 
 		params.max = Math.min(params.max ? params.int('max') : 10, 100)
-		log.debug "params.max: ${params.max}"
 
-		def periodId = params?.periodId
-		def periodInstance
-		if (periodId) {
-			periodInstance = Period.get(periodId)
-		} else {
+		def periodInstance = Period.read(params?.periodInstance?.id)
+		if ( !periodInstance ) {
 			periodInstance = laborReportingService.getCurrentPeriodOfTypeMonth()
 		}
 		log.debug "periodInstance: ${periodInstance}"
 
-		
 
 		[submissionInstanceList: Submission.list(params), submissionInstanceTotal: Submission.count()]
-
-
 
 	}
 /*

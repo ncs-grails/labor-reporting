@@ -7,7 +7,7 @@ class LaborReportingService {
 
 	def getPerson(principal) {
 
-		log.debug "BEGIN def getPerson(principal)"
+		log.debug "BEGIN getPerson(principal)"
 		
 		def uname = principal.getUsername()
 		log.debug "  uname = ${uname}" 
@@ -54,7 +54,7 @@ class LaborReportingService {
 		}  
 
 		log.debug "  person = ${person}"
-		log.debug "END def getPerson(principal)"
+		log.debug "END getPerson(principal)"
 		return person
 
 	} // getPerson(principal)
@@ -62,21 +62,36 @@ class LaborReportingService {
 
 	def getCurrentPeriodOfTypeMonth() {
 
-		log.debug "BEGIN def getCurrentPeriodOfTypeMonth"
+		log.debug "BEGIN getCurrentPeriodOfTypeMonth"
 
+		// period type
+		def periodTypeInstance = PeriodType.findByName("Month")
+		log.debug " => periodTypeInstance = ${periodTypeInstance}"
+
+		// start and end datetime
 		def today = new DateMidnight()	
 		log.debug " => today = ${today}"
 
-		def lastMonth = today.minusMonths(1)
-		log.debug " => lastMonth = ${lastMonth}"
+		def lastMonthFromToday = today.minusMonths(1)
+		log.debug " => lastMonthFromToday = ${lastMonthFromToday}"
 
-		def lastMonthFirstDay = lastMonth.minusDays(lastMonth.dayOfMonth-1).toCalendar().getTime()
+		def lastMonthFirstDay = lastMonthFromToday.minusDays(lastMonthFromToday.dayOfMonth-1)
 		log.debug " => lastMonthFirstDay = ${lastMonthFirstDay}"
 
-		def currentPeriodInstance = Period.findByStartDate(lastMonthFirstDay)
+		def lastMonthLastDay = lastMonthFirstDay.plusMonths(1).minusDays(1)
+		log.debug " => lastMonthLastDay = ${lastMonthLastDay}"
+
+		def startDate = lastMonthFirstDay.toCalendar().getTime()
+		log.debug " => startDate = ${startDate}"
+
+		def endDate = lastMonthLastDay.toCalendar().getTime()
+		log.debug " => endDate = ${endDate}"
+
+		// period
+		def currentPeriodInstance = Period.findOrCreateWhere(type:periodTypeInstance, startDate:startDate, endDate:endDate) 
 		log.debug " => currentPeriodInstance = ${currentPeriodInstance}"
 
-		log.debug "END def getCurrentPeriodOfTypeMonth"
+		log.debug "END getCurrentPeriodOfTypeMonth"
 
 		return currentPeriodInstance
 	
