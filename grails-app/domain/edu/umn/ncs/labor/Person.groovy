@@ -18,7 +18,7 @@ class Person {
 	String userCreated 
 	String appCreated = 'labor-reporting'
 
-	static hasMany = [assignment: Assignment]
+	static hasMany = [assignments: Assignment]
 	static transients = ['fullNameLFM', 'fullNameFML']
 
     static constraints = {

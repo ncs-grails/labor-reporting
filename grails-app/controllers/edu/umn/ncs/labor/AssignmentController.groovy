@@ -52,7 +52,10 @@ class AssignmentController {
 		}
 		log.debug "periodInstance: ${periodInstance}"
 
-		[ periodInstance: periodInstance ]
+		def assignmentInstance = Assignment.findAllWhere(period:periodInstance)
+		log.debug "assignmentInstance: ${assignmentInstance}"
+
+		[ assignmentInstance: assignmentInstance ]
 
 
 /*

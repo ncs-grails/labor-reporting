@@ -18,7 +18,7 @@ class Period {
 
     }
 
-	static hasMany = [assignment: Assignment]
+	static hasMany = [assignments: Assignment]
 
 	def onDelete = { oldMap ->
 

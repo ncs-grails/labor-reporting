@@ -6,7 +6,7 @@ class Assignment {
     static auditable = true
 
 	static belongsTo = [person: Person, period: Period]
-	static hasMany = [email: EmailNotice, submission: Submission]
+	static hasMany = [emails: EmailNotice, submissions: Submission]
 
 
 	Period period

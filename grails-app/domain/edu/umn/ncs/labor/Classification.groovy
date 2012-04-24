@@ -23,10 +23,6 @@ class Classification {
 
 	static mapping = { sort "name"}
 
-	static activeClassification = where {
-		active == true
-	}
-
 	def onDelete = { oldMap ->
 
 		def now = new Date()

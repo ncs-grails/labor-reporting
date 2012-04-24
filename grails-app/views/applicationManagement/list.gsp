@@ -13,7 +13,7 @@
 		<!-- NAVIGATION -->
 		<sec:ifAnyGranted roles="ROLE_NCS_IT,ROLE_NCS_DLR_MANAGE">
 			<div class="breadcrumbs">
-				<g:link controller="main" action="show">DLR Home</g:link>
+				<a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a>
 			</div>
 		</sec:ifAnyGranted>
 		
@@ -54,7 +54,7 @@
 
 				</ul>
 
-				<h2>Reporting Source Specific</h2>
+				<h2>Specific to Reporting Source</h2>
 
 				<ul>
 
