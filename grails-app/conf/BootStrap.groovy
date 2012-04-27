@@ -82,22 +82,37 @@ class BootStrap {
 				def taskTraining = new Task(name:'Training', type:typeSfr, active:true, userCreated:'will1945').save(failOnError:true) 
 
 				// Effort Assignment
-				def assignment201203Ngp = new Assignment(
-					period:period2012April,
+				def assignment_2012_03_Ngp = new Assignment(
+					period:period2012March,
 					percentEffort:45.5,
 					dateCreated:'04/04/2012',
 					userCreated:personWill1945,
 					person:personNgp,
 					certifyDate:'04/21/2012',
 					certifier:personNgp).save(failOnError:true) 
-				def assignment201203Sqv = new Assignment(
+				def assignment_2012_03_Sqv = new Assignment(
 					period:period2012March,
-					percentEffort:75,
+					percentEffort:75.25,
 					dateCreated:'04/04/2012',
 					userCreated:personWill1945,
 					person:personSqv,
 					certifyDate:'04/20/2012',
 					certifier:personSqv).save(failOnError:true) 
+
+				// Email Notice
+				def emailNotice1 = new EmailNotice(
+					assignment:assignment_2012_03_Ngp,
+					dateSent:'04/04/2012',
+					userSent:'will1945').save(failOnError:true)
+				def emailNotice2 = new EmailNotice(
+					assignment:assignment_2012_03_Sqv,
+					dateSent:'04/04/2012',
+					userSent:'will1945').save(failOnError:true)
+				def emailNotice3 = new EmailNotice(
+					assignment:assignment_2012_03_Sqv,
+					dateSent:'04/04/2012',
+					userSent:'will1945').save(failOnError:true)
+
 
 			} //development
 

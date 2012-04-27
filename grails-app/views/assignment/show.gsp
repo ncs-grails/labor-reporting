@@ -20,36 +20,64 @@
 				<g:link controller="applicationManagement" action="list">Application Management</g:link>
 			</div>
 
-			<div id="show-assignment" class="content scaffold-show" role="main">
+			<!-- TITLE -->
+			<h1>Effort Assignment</h1>
 
-				<!-- TITLE -->
-				<h1>Effort Assignment<h1>
+			<!-- ERROR MESSAGE -->	
+			<g:if test="${flash.message}"><div class="message" role="status">${flash.message}</div></g:if>
 
-				<!-- ERROR MESSAGE -->	
-				<g:if test="${flash.message}"><div class="message" role="status">${flash.message}</div></g:if>
+			<g:form>
 
-				<ol class="property-list assignment">
-				</ol>
+				<table>
 
-				<g:form>
+					<thead>
+						<tr>
+							<th colspan="11"><strong>${assignmentInstance.period} (Period Id: ${assignmentInstance.period.id})</strong></th>
+						</tr>
+						<tr>
+							<th rowspan="3"></th>
+							<th rowspan="2" colspan="2">STAFF<br />(who reports effort)</th>
+							<th colspan="5">EFFORT</th>
+							<th colspan="2">NOTIFICATION EMAIL</th>
+						</tr>
+						<tr>
+							<th colspan="3">ASSIGNED</th>
+							<th rowspan="2">REPORTED</th>
+							<th rowspan="2">COMMITTED<br/>(date)</th>
+							<th rowspan="2">Dates Email Sent</th>
+							<th rowspan="2">Send<br />Now</th>
+						</tr>
+						<tr>
+							<th>Name</th>
+							<th>Id</th>
+							<th>Previous</th>
+							<th>Copy Over</th>
+							<th>Current</th>
+						</tr>
+					</thead>
 
-					<!--			
-					<fieldset class="buttons">
-						<g:hiddenField name="id" value="${assignmentInstance?.id}" />
-						<g:link class="edit" action="edit" id="${assignmentInstance?.id}">
-							<g:message code="default.button.edit.label" default="Edit" />
-						</g:link>
-						<g:actionSubmit 
-							class="delete" 
-							action="delete" 
-							value="${message(code: 'default.button.delete.label', default: 'Delete')}" 
-							onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-					</fieldset>
-					-->
+					<tbody>
+						<g:each var="ea" in="${assignmentInstance}">
+							<tr>
+								<td>${ea.id}</td>
+								<td>${ea.person.fullNameLFM}</td>
+								<td>${ea.person.id}</td>
+								<td>${ea.id}</td>
+								<td style="text-align:center;"><input type="checkbox" name"person-${ea.person.id}-copyOver"/></td>
+								<td>${ea.id}</td>
+								<td>${ea.id}</td>
+								<td><g:formatDate date="${ea.certifyDate}" format="yyyy-MM-dd" /></td>
+								<td>
+									${ea.emails}.join(', ')
+								</td>
+								<td style="text-align:center;"><input type="checkbox" name"person-${ea.person.id}.sendNow"</td>
+							</tr>
+						</g:each>
+					</tbody>
 
-				</g:form>
+				</table>
 
-			</div>
+			</g:form>
 
 		</sec:ifAnyGranted>
 

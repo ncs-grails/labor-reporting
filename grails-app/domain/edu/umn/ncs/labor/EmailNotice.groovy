@@ -9,14 +9,15 @@ class EmailNotice {
 	static belongsTo = [assignment: Assignment]
 	
 	Date dateSent = new Date()
-	Date userSent
+	String userSent
 
     static constraints = {
 		dateSent(blank:false)
-		userSent(blank:false)
+		userSent(blank:false, maxSize:60)
     }
 
-	String toString() { "${dateSent} (${userSent})" }
+	String toString() { "${dateSent}" }
+	//String toString() { "${dateSent} (${userSent})" }
 
     def onDelete = { oldMap ->
 
@@ -26,10 +27,10 @@ class EmailNotice {
             oldValue += " assignment.period.startDate ${oldMap.assignment.period.startDate}"
             oldValue += ", dateSent: ${oldMap.dateSent}"
             oldValue += ", userSent: ${oldMap.userSent} "
-        //println "PRINTLN NotificationEmailDomain.onDelete.oldValue: ${oldValue}"
+        	log.debug "PRINTLN NotificationEmailDomain.onDelete.oldValue: ${oldValue}"
 
         String className = this.class.toString().replace('class ', '')
-        //println "${now}\tAudit:DELETE::\t${oldValue}"
+        log.debug "${now}\tAudit:DELETE::\t${oldValue}"
 
         def auditLogEventInstance = new AuditLogEvent(
             className: className,
@@ -43,7 +44,7 @@ class EmailNotice {
 
         if ( ! auditLogEventInstance.save() ) {
             auditLogEventInstance.errors.each{
-                //println "${now}\tError Transacting DELETE:: \t ${it}"
+                log.debug "${now}\tError Transacting DELETE:: \t ${it}"
             }
         }
 
